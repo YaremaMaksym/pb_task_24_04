@@ -2,7 +2,6 @@ package yaremax.com.pb_task_24_04.parsers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import yaremax.com.pb_task_24_04.dto.AnimalDto;
 
 import java.io.File;
@@ -19,7 +18,6 @@ class XmlFileParserTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         xmlFileParser = new XmlFileParser<>();
     }
 
