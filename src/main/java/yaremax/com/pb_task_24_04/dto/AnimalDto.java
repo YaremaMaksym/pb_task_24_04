@@ -1,12 +1,18 @@
 package yaremax.com.pb_task_24_04.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
 @Builder
-public record AnimalDto(String name,
-                        String type,
-                        String sex,
-                        int weight,
-                        int cost) implements Parsable {
-
+@AllArgsConstructor
+@NoArgsConstructor
+public class AnimalDto implements Parsable{
+    private String name;
+    private String type;
+    private String sex;
+    private int weight;
+    private int cost;
 }
