@@ -1,8 +1,9 @@
-package yaremax.com.pb_task_24_04.parsers;
+package yaremax.com.pb_task_24_04.util.parsers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import yaremax.com.pb_task_24_04.data.Animal;
+import yaremax.com.pb_task_24_04.animal.AnimalDto;
+import yaremax.com.pb_task_24_04.util.parsers.CsvFileParser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,7 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class CsvFileParserTest {
 
-    private CsvFileParser<Animal> csvFileParser;
+    private CsvFileParser<AnimalDto> csvFileParser;
 
     @BeforeEach
     void setUp() {
@@ -37,9 +38,9 @@ class CsvFileParserTest {
     @Test
     void parse_ValidCsvFile_ReturnsData() throws IOException {
         // Arrange
-        List<Animal> dtoList = List.of(
-                Animal.builder().name("Milo").type("cat").sex("male").weight(40).cost(51).build(),
-                Animal.builder().name("Toby").type("dog").sex("female").weight(7).cost(14).build()
+        List<AnimalDto> dtoList = List.of(
+                AnimalDto.builder().name("Milo").type("cat").sex("male").weight(40).cost(51).build(),
+                AnimalDto.builder().name("Toby").type("dog").sex("female").weight(7).cost(14).build()
         );
         String csvContent = """
                 name,type,sex,weight,cost
@@ -49,7 +50,7 @@ class CsvFileParserTest {
         File csvFile = createTempCsvFile(csvContent);
 
         // Act
-        Optional<List<Animal>> optionalDataList = csvFileParser.parse(csvFile, Animal.class);
+        Optional<List<AnimalDto>> optionalDataList = csvFileParser.parse(csvFile, AnimalDto.class);
 
         // Assert
         assertThat(optionalDataList).isPresent();
@@ -64,7 +65,7 @@ class CsvFileParserTest {
         File csvFile = createTempCsvFile(invalidCsvContent);
 
         // Act
-        Optional<List<Animal>> optionalData = csvFileParser.parse(csvFile, Animal.class);
+        Optional<List<AnimalDto>> optionalData = csvFileParser.parse(csvFile, AnimalDto.class);
 
         // Assert
         assertThat(optionalData.get().isEmpty()).isTrue();

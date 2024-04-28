@@ -1,8 +1,9 @@
-package yaremax.com.pb_task_24_04.parsers;
+package yaremax.com.pb_task_24_04.util.parsers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import yaremax.com.pb_task_24_04.dto.AnimalDto;
+import yaremax.com.pb_task_24_04.animal.AnimalDto;
+import yaremax.com.pb_task_24_04.util.parsers.XmlFileParser;
 
 import java.io.File;
 import java.io.FileWriter;

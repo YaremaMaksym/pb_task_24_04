@@ -1,9 +1,9 @@
-package yaremax.com.pb_task_24_04.parsers;
+package yaremax.com.pb_task_24_04.util.parsers;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.stereotype.Service;
-import yaremax.com.pb_task_24_04.dto.Parsable;
+import yaremax.com.pb_task_24_04.markers.Parsable;
 
 import java.io.File;
 import java.io.FileReader;
