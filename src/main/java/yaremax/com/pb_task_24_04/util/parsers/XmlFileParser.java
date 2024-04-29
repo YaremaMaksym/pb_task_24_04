@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import yaremax.com.pb_task_24_04.markers.Parsable;
+import yaremax.com.pb_task_24_04.markers.Processable;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class XmlFileParser<T extends Parsable> implements FileParser<T> {
+public class XmlFileParser<T extends Processable> implements FileParser<T> {
 
     @Override
     public String getSupportedExtension() {
