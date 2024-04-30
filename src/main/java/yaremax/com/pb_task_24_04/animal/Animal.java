@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
-import org.hibernate.proxy.HibernateProxy;
 import yaremax.com.pb_task_24_04.markers.Processable;
 import yaremax.com.pb_task_24_04.markers.Validatable;
 
