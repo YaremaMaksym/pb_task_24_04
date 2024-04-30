@@ -1,0 +1,10 @@
+spring:
+    application:
+        name: pb_task_24_04
+    datasource:
+        url: jdbc:postgresql://localhost:5432/pb_db
+        username: postgres
+        password: pass
+    jpa:
+        hibernate:
+            ddl-auto: update
