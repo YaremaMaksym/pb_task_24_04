@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.io.IOException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -39,7 +38,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return handleException(ex, request, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = {IllegalStateException.class, NullPointerException.class, IllegalArgumentException.class})
+    @ExceptionHandler(value = {IllegalStateException.class, NullPointerException.class, IllegalArgumentException.class, FileConversionException.class})
     public ResponseEntity<Object> handleInternalServerErrorExceptions(RuntimeException ex, HttpServletRequest request){
         return handleException(ex, request, HttpStatus.INTERNAL_SERVER_ERROR);
     }
