@@ -1,4 +1,4 @@
-package yaremax.com.pb_task_24_04.util.parsers;
+package yaremax.com.pb_task_24_04.util.parser.strategies;
 
 
 import org.junit.jupiter.api.BeforeEach;
