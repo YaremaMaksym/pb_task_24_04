@@ -38,4 +38,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleBadRequestExceptions(RuntimeException ex, HttpServletRequest request){
         return handleException(ex, request, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = {IllegalStateException.class, NullPointerException.class, IllegalArgumentException.class})
+    public ResponseEntity<Object> handleInternalServerErrorExceptions(RuntimeException ex, HttpServletRequest request){
+        return handleException(ex, request, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
