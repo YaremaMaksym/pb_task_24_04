@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
 import yaremax.com.pb_task_24_04.markers.Processable;
 import yaremax.com.pb_task_24_04.util.MultipartFileToFileConverter;
 
@@ -24,10 +25,11 @@ public class FileParserService<T extends Processable> {
 
     public Optional<List<T>> parseFile(MultipartFile multipartFile, Class<T> entityClass) {
         String extension = FilenameUtils.getExtension(multipartFile.getOriginalFilename());
-        return fileParserFactory.getParser(extension)
-                .flatMap(parser -> {
+        return Optional.ofNullable(fileParserFactory.getParser(extension))
+                .map(parser -> {
                         Optional<File> file = multipartFileToFileConverter.convert(multipartFile);
                         return parser.parse(file, entityClass);
-                });
+                })
+                .orElseThrow(() -> new FileParsingException("Unsupported file format: " + extension));
     }
 }

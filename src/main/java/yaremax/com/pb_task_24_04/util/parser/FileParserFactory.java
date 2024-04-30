@@ -1,6 +1,7 @@
 package yaremax.com.pb_task_24_04.util.parser;
 
 import org.springframework.stereotype.Component;
+import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
 import yaremax.com.pb_task_24_04.markers.Processable;
 import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
 
@@ -19,8 +20,9 @@ public class FileParserFactory<T extends Processable> {
                 .collect(Collectors.toMap(FileParserStrategy::getSupportedExtension, s -> s));
     }
 
-    public Optional<FileParserStrategy<T>> getParser(String extension) {
-        return Optional.ofNullable(strategies.get(extension));
+    public FileParserStrategy<T> getParser(String extension) {
+        return Optional.ofNullable(strategies.get(extension))
+                .orElseThrow(() -> new FileParsingException("Unsupported file format: " + extension));
     }
 
     public Set<String> getAllSupportedExtensions() {

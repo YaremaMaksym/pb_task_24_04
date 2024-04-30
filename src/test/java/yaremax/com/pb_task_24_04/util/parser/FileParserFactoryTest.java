@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
 import yaremax.com.pb_task_24_04.markers.Processable;
 import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,26 +35,24 @@ class FileParserFactoryTest {
         FileParserFactory<Processable> fileParserFactory = new FileParserFactory<>(strategies);
 
         // Act
-        Optional<FileParserStrategy<Processable>> csvParser = fileParserFactory.getParser("csv");
-        Optional<FileParserStrategy<Processable>> xmlParser = fileParserFactory.getParser("xml");
+        FileParserStrategy<Processable> csvParser = fileParserFactory.getParser("csv");
+        FileParserStrategy<Processable> xmlParser = fileParserFactory.getParser("xml");
 
         // Assert
-        assertThat(csvParser).isPresent().contains(csvStrategy);
-        assertThat(xmlParser).isPresent().contains(xmlStrategy);
+        assertThat(csvParser).isNotNull().isEqualTo(csvStrategy);
+        assertThat(xmlParser).isNotNull().isEqualTo(xmlStrategy);
     }
 
     @Test
-    void getParser_NonExistingExtension_ReturnsEmpty() {
+    void getParser_NonExistingExtension_ThrowsException() {
         // Arrange
         when(csvStrategy.getSupportedExtension()).thenReturn("csv");
         List<FileParserStrategy<Processable>> strategies = Arrays.asList(csvStrategy);
         FileParserFactory<Processable> fileParserFactory = new FileParserFactory<>(strategies);
 
-        // Act
-        Optional<FileParserStrategy<Processable>> txtParser = fileParserFactory.getParser("txt");
-
-        // Assert
-        assertThat(txtParser).isEmpty();
+        // Act & Assert
+        assertThatThrownBy(() -> fileParserFactory.getParser("txt"))
+                .isInstanceOf(FileParsingException.class);
     }
 
     @Test
@@ -69,5 +69,4 @@ class FileParserFactoryTest {
         // Assert
         assertThat(supportedExtensions).containsExactlyInAnyOrder("csv", "xml");
     }
-
 }
