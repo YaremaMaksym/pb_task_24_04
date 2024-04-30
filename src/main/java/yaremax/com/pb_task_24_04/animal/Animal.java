@@ -30,19 +30,22 @@ public class Animal implements Processable, Validatable {
     private Category category;
 
     @Override
-    public final boolean equals(Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null) return false;
-        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-        if (thisEffectiveClass != oEffectiveClass) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Animal animal = (Animal) o;
-        return getId() != null && Objects.equals(getId(), animal.getId());
+        return Objects.equals(id, animal.id) &&
+                Objects.equals(name, animal.name) &&
+                Objects.equals(type, animal.type) &&
+                Objects.equals(sex, animal.sex) &&
+                Objects.equals(weight, animal.weight) &&
+                Objects.equals(cost, animal.cost) &&
+                Objects.equals(category, animal.category);
     }
 
     @Override
-    public final int hashCode() {
-        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    public int hashCode() {
+        return Objects.hash(id, name, type, sex, weight, cost, category);
     }
 }
 
