@@ -7,8 +7,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
+import yaremax.com.pb_task_24_04.animal.AnimalDto;
 import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
-import yaremax.com.pb_task_24_04.markers.Processable;
 import yaremax.com.pb_task_24_04.util.MultipartFileToFileConverter;
 import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
 
@@ -27,32 +27,32 @@ import static org.mockito.Mockito.when;
 class FileParserServiceTest {
 
     @Mock
-    private FileParserFactory<Processable> fileParserFactory;
+    private FileParserFactory<AnimalDto> fileParserFactory;
 
     @Mock
-    private FileParserStrategy<Processable> csvStrategy;
+    private FileParserStrategy<AnimalDto> csvStrategy;
 
     @Mock
     private MultipartFileToFileConverter multipartFileToFileConverter;
 
     @InjectMocks
-    private FileParserService<Processable> fileParserService;
+    private FileParserService<AnimalDto> fileParserService;
 
     @Test
     void parseFile_ExistingExtension_ReturnsEntities() throws IOException {
         // Arrange
         MultipartFile multipartFile = new MockMultipartFile("test.csv", "test.csv", "text/csv", "content".getBytes());
         File file = new File("test.csv");
-        Processable entity1 = new Processable() {};
-        Processable entity2 = new Processable() {};
-        List<Processable> entities = Arrays.asList(entity1, entity2);
+        AnimalDto entity1 = new AnimalDto() {};
+        AnimalDto entity2 = new AnimalDto() {};
+        List<AnimalDto> entities = Arrays.asList(entity1, entity2);
 
         when(fileParserFactory.getParser("csv")).thenReturn(csvStrategy);
         when(multipartFileToFileConverter.convert(multipartFile)).thenReturn(Optional.of(file));
-        when(csvStrategy.parse(Optional.of(file), Processable.class)).thenReturn(Optional.of(entities));
+        when(csvStrategy.parse(Optional.of(file), AnimalDto.class)).thenReturn(Optional.of(entities));
 
         // Act
-        Optional<List<Processable>> parsedEntities = fileParserService.parseFile(multipartFile, Processable.class);
+        Optional<List<AnimalDto>> parsedEntities = fileParserService.parseFile(multipartFile, AnimalDto.class);
 
         // Assert
         assertThat(parsedEntities).isPresent().contains(entities);
@@ -66,7 +66,7 @@ class FileParserServiceTest {
         when(fileParserFactory.getParser("txt")).thenReturn(null);
 
         // Act & Assert
-        assertThatThrownBy(() -> fileParserService.parseFile(multipartFile, Processable.class))
+        assertThatThrownBy(() -> fileParserService.parseFile(multipartFile, AnimalDto.class))
                 .isInstanceOf(FileParsingException.class);
     }
 

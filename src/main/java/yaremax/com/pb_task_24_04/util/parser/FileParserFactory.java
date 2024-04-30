@@ -2,7 +2,6 @@ package yaremax.com.pb_task_24_04.util.parser;
 
 import org.springframework.stereotype.Component;
 import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
-import yaremax.com.pb_task_24_04.markers.Processable;
 import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class FileParserFactory<T extends Processable> {
+public class FileParserFactory<T> {
     private final Map<String, FileParserStrategy<T>> strategies;
 
     public FileParserFactory(List<FileParserStrategy<T>> strategies) {

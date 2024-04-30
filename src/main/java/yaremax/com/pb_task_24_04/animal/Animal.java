@@ -5,8 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
-import yaremax.com.pb_task_24_04.markers.Processable;
-import yaremax.com.pb_task_24_04.markers.Validatable;
 
 import java.util.Objects;
 
@@ -17,7 +15,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Animal implements Processable, Validatable {
+public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

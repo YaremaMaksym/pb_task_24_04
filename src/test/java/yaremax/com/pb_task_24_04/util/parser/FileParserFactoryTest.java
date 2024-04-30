@@ -4,13 +4,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import yaremax.com.pb_task_24_04.animal.AnimalDto;
 import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
-import yaremax.com.pb_task_24_04.markers.Processable;
 import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,22 +20,22 @@ import static org.mockito.Mockito.when;
 class FileParserFactoryTest {
 
     @Mock
-    private FileParserStrategy<Processable> csvStrategy;
+    private FileParserStrategy<AnimalDto> csvStrategy;
 
     @Mock
-    private FileParserStrategy<Processable> xmlStrategy;
+    private FileParserStrategy<AnimalDto> xmlStrategy;
 
     @Test
     void getParser_ExistingExtension_ReturnsStrategy() {
         // Arrange
         when(csvStrategy.getSupportedExtension()).thenReturn("csv");
         when(xmlStrategy.getSupportedExtension()).thenReturn("xml");
-        List<FileParserStrategy<Processable>> strategies = Arrays.asList(csvStrategy, xmlStrategy);
-        FileParserFactory<Processable> fileParserFactory = new FileParserFactory<>(strategies);
+        List<FileParserStrategy<AnimalDto>> strategies = Arrays.asList(csvStrategy, xmlStrategy);
+        FileParserFactory<AnimalDto> fileParserFactory = new FileParserFactory<>(strategies);
 
         // Act
-        FileParserStrategy<Processable> csvParser = fileParserFactory.getParser("csv");
-        FileParserStrategy<Processable> xmlParser = fileParserFactory.getParser("xml");
+        FileParserStrategy<?> csvParser = fileParserFactory.getParser("csv");
+        FileParserStrategy<?> xmlParser = fileParserFactory.getParser("xml");
 
         // Assert
         assertThat(csvParser).isNotNull().isEqualTo(csvStrategy);
@@ -47,8 +46,8 @@ class FileParserFactoryTest {
     void getParser_NonExistingExtension_ThrowsException() {
         // Arrange
         when(csvStrategy.getSupportedExtension()).thenReturn("csv");
-        List<FileParserStrategy<Processable>> strategies = Arrays.asList(csvStrategy);
-        FileParserFactory<Processable> fileParserFactory = new FileParserFactory<>(strategies);
+        List<FileParserStrategy<AnimalDto>> strategies = List.of(csvStrategy);
+        FileParserFactory<AnimalDto> fileParserFactory = new FileParserFactory<>(strategies);
 
         // Act & Assert
         assertThatThrownBy(() -> fileParserFactory.getParser("txt"))
@@ -60,8 +59,8 @@ class FileParserFactoryTest {
         // Arrange
         when(csvStrategy.getSupportedExtension()).thenReturn("csv");
         when(xmlStrategy.getSupportedExtension()).thenReturn("xml");
-        List<FileParserStrategy<Processable>> strategies = Arrays.asList(csvStrategy, xmlStrategy);
-        FileParserFactory<Processable> fileParserFactory = new FileParserFactory<>(strategies);
+        List<FileParserStrategy<AnimalDto>> strategies = Arrays.asList(csvStrategy, xmlStrategy);
+        FileParserFactory<AnimalDto> fileParserFactory = new FileParserFactory<>(strategies);
 
         // Act
         Set<String> supportedExtensions = fileParserFactory.getAllSupportedExtensions();

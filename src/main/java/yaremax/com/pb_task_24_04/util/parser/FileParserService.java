@@ -5,7 +5,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
-import yaremax.com.pb_task_24_04.markers.Processable;
 import yaremax.com.pb_task_24_04.util.MultipartFileToFileConverter;
 
 import java.io.File;
@@ -15,7 +14,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class FileParserService<T extends Processable> {
+public class FileParserService<T> {
     private final FileParserFactory<T> fileParserFactory;
     private final MultipartFileToFileConverter multipartFileToFileConverter;
 

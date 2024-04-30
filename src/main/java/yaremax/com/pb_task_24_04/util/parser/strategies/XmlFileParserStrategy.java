@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.stereotype.Component;
 import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
-import yaremax.com.pb_task_24_04.markers.Processable;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class XmlFileParserStrategy<T extends Processable> implements FileParserStrategy<T> {
+public class XmlFileParserStrategy<T> implements FileParserStrategy<T> {
 
     @Override
     public String getSupportedExtension() {
