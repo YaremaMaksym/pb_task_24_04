@@ -13,9 +13,7 @@ import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -68,4 +66,18 @@ class FileParserServiceTest {
         // Assert
         assertThat(parsedEntities).isEmpty();
     }
+
+    @Test
+    void getAllSupportedExtensions_ReturnsCorrectSet() {
+        // Arrange
+        Set<String> supportedExtensions = new HashSet<>(Arrays.asList("csv", "xml"));
+        when(fileParserFactory.getAllSupportedExtensions()).thenReturn(supportedExtensions);
+
+        // Act
+        Set<String> result = fileParserService.getAllSupportedExtensions();
+
+        // Assert
+        assertThat(result).isEqualTo(supportedExtensions);
+    }
+
 }

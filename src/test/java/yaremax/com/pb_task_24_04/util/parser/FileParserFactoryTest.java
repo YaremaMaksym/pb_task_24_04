@@ -10,6 +10,7 @@ import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -53,4 +54,20 @@ class FileParserFactoryTest {
         // Assert
         assertThat(txtParser).isEmpty();
     }
+
+    @Test
+    void getAllSupportedExtensions_ReturnsCorrectSet() {
+        // Arrange
+        when(csvStrategy.getSupportedExtension()).thenReturn("csv");
+        when(xmlStrategy.getSupportedExtension()).thenReturn("xml");
+        List<FileParserStrategy<Processable>> strategies = Arrays.asList(csvStrategy, xmlStrategy);
+        FileParserFactory<Processable> fileParserFactory = new FileParserFactory<>(strategies);
+
+        // Act
+        Set<String> supportedExtensions = fileParserFactory.getAllSupportedExtensions();
+
+        // Assert
+        assertThat(supportedExtensions).containsExactlyInAnyOrder("csv", "xml");
+    }
+
 }

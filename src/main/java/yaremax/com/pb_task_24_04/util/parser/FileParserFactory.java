@@ -7,6 +7,7 @@ import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -20,5 +21,9 @@ public class FileParserFactory<T extends Processable> {
 
     public Optional<FileParserStrategy<T>> getParser(String extension) {
         return Optional.ofNullable(strategies.get(extension));
+    }
+
+    public Set<String> getAllSupportedExtensions() {
+        return strategies.keySet();
     }
 }
