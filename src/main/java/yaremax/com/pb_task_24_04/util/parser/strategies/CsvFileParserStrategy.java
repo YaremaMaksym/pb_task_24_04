@@ -32,7 +32,7 @@ public class CsvFileParserStrategy<T extends Processable> implements FileParserS
 
                 return Optional.of(csvToBean.parse());
             } catch (IOException e) {
-                throw new FileParsingException("Failed to parse CSV file");
+                throw new FileParsingException("Failed to parse CSV file", e);
             }
         });
     }

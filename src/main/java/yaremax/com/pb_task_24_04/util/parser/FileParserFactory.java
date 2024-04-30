@@ -19,6 +19,6 @@ public class FileParserFactory<T extends Processable> {
     }
 
     public Optional<FileParserStrategy<T>> getParser(String extension) {
-        return Optional.of(strategies.get(extension));
+        return Optional.ofNullable(strategies.get(extension));
     }
 }

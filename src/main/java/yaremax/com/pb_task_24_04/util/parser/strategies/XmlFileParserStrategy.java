@@ -28,9 +28,9 @@ public class XmlFileParserStrategy<T extends Processable> implements FileParserS
                 CollectionType listType = xmlMapper.getTypeFactory().constructCollectionType(List.class, entityClass);
                 return Optional.of(xmlMapper.readValue(file, listType));
             } catch (JsonParseException e) {
-                throw new FileParsingException("Exception occurred during parsing data from XML: " + e.getMessage());
+                throw new FileParsingException("Failed to parse XML file", e);
             } catch (IOException e) {
-                throw new FileParsingException("Exception occurred during parsing data from XML: " + e.getMessage());
+                throw new FileParsingException("Failed to parse XML file", e);
             }
         });
     }
