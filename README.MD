@@ -22,6 +22,8 @@ The project uses the following technologies and frameworks:
 - Jackson (XML parsing)
 - Opencsv (CSV parsing)
 - Commons io (Get file info)
+- AssertJ (testing)
+- Mockito (testing)
 - Springdoc openapi (Swagger documentation)
 - Git (for version control)
 
