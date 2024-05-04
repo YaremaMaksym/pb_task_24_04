@@ -4,9 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import yaremax.com.pb_task_24_04.animal.AnimalDto;
-import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
-import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
+import yaremax.com.pb_task_24_04.dto.AnimalDto;
+import yaremax.com.pb_task_24_04.exception.FileParsingException;
+import yaremax.com.pb_task_24_04.service.parser.FileParserFactory;
+import yaremax.com.pb_task_24_04.service.parser.strategy.FileParserStrategy;
 
 import java.util.Arrays;
 import java.util.List;

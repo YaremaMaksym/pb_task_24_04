@@ -6,6 +6,9 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.domain.Specification;
+import yaremax.com.pb_task_24_04.entity.Animal;
+import yaremax.com.pb_task_24_04.entity.Category;
+import yaremax.com.pb_task_24_04.specification.AnimalSpecification;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

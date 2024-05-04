@@ -2,7 +2,7 @@ package yaremax.com.pb_task_24_04.util;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import yaremax.com.pb_task_24_04.exceptions.FileConversionException;
+import yaremax.com.pb_task_24_04.exception.FileConversionException;
 
 import java.io.File;
 import java.io.FileOutputStream;

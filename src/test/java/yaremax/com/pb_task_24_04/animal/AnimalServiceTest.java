@@ -7,6 +7,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import yaremax.com.pb_task_24_04.entity.Animal;
+import yaremax.com.pb_task_24_04.entity.Category;
+import yaremax.com.pb_task_24_04.repository.AnimalRepository;
+import yaremax.com.pb_task_24_04.service.AnimalService;
 
 import java.util.Arrays;
 import java.util.List;

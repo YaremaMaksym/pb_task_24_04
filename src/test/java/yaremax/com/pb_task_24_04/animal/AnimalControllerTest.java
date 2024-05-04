@@ -10,6 +10,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import yaremax.com.pb_task_24_04.controller.AnimalController;
+import yaremax.com.pb_task_24_04.entity.Animal;
+import yaremax.com.pb_task_24_04.entity.Category;
+import yaremax.com.pb_task_24_04.service.AnimalService;
 
 import java.util.Arrays;
 import java.util.Collections;

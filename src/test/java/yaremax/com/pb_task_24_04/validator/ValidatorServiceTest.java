@@ -2,10 +2,11 @@ package yaremax.com.pb_task_24_04.validator;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import yaremax.com.pb_task_24_04.animal.Animal;
-import yaremax.com.pb_task_24_04.validator.strategies.ValidationStrategy;
-import yaremax.com.pb_task_24_04.validator.strategies.animal.AnimalCostValidationStrategy;
-import yaremax.com.pb_task_24_04.validator.strategies.animal.AnimalNameValidationStrategy;
+import yaremax.com.pb_task_24_04.entity.Animal;
+import yaremax.com.pb_task_24_04.service.validator.ValidatorService;
+import yaremax.com.pb_task_24_04.service.validator.strategy.ValidationStrategy;
+import yaremax.com.pb_task_24_04.service.validator.strategy.animal.AnimalCostValidationStrategy;
+import yaremax.com.pb_task_24_04.service.validator.strategy.animal.AnimalNameValidationStrategy;
 
 import java.util.List;
 import java.util.Optional;

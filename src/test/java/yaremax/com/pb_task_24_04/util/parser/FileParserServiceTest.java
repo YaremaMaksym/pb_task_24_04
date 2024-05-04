@@ -7,10 +7,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
-import yaremax.com.pb_task_24_04.animal.AnimalDto;
-import yaremax.com.pb_task_24_04.exceptions.FileParsingException;
+import yaremax.com.pb_task_24_04.dto.AnimalDto;
+import yaremax.com.pb_task_24_04.exception.FileParsingException;
+import yaremax.com.pb_task_24_04.service.parser.FileParserFactory;
+import yaremax.com.pb_task_24_04.service.parser.FileParserService;
 import yaremax.com.pb_task_24_04.util.MultipartFileToFileConverter;
-import yaremax.com.pb_task_24_04.util.parser.strategies.FileParserStrategy;
+import yaremax.com.pb_task_24_04.service.parser.strategy.FileParserStrategy;
 
 import java.io.File;
 import java.io.IOException;

@@ -3,9 +3,10 @@ package yaremax.com.pb_task_24_04.categorization;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import yaremax.com.pb_task_24_04.animal.Animal;
-import yaremax.com.pb_task_24_04.animal.Category;
-import yaremax.com.pb_task_24_04.exceptions.InvalidDataException;
+import yaremax.com.pb_task_24_04.entity.Animal;
+import yaremax.com.pb_task_24_04.entity.Category;
+import yaremax.com.pb_task_24_04.exception.InvalidDataException;
+import yaremax.com.pb_task_24_04.service.categorization.AnimalCategoryAssigner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
