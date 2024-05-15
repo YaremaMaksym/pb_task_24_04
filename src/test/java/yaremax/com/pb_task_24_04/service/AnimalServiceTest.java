@@ -1,16 +1,15 @@
-package yaremax.com.pb_task_24_04.animal;
+package yaremax.com.pb_task_24_04.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import yaremax.com.pb_task_24_04.entity.Animal;
 import yaremax.com.pb_task_24_04.entity.Category;
 import yaremax.com.pb_task_24_04.repository.AnimalRepository;
-import yaremax.com.pb_task_24_04.service.AnimalService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,37 +51,57 @@ class AnimalServiceTest {
     }
 
     @Test
-    void getAnimals_NoFilters_ShouldReturnAllAnimals() {
+    void getAnimals_NoExampleNoSort_ShouldReturnAllAnimals() {
         // Arrange
         List<Animal> animals = Arrays.asList(
                 Animal.builder().name("Buddy").type("Dog").sex("Male").weight(10).cost(100).category(Category.FOURTH).build(),
                 Animal.builder().name("Kitty").type("Cat").sex("Female").weight(5).cost(50).category(Category.SECOND).build()
         );
-        when(animalRepository.findAll(any(Specification.class), any(Sort.class))).thenReturn(animals);
+        when(animalRepository.findAll()).thenReturn(animals);
 
         // Act
-        List<Animal> result = animalService.getAnimals(null, null, null, Sort.unsorted());
+        List<Animal> result = animalService.getAnimals(null, Sort.unsorted());
 
         // Assert
         assertThat(result).isEqualTo(animals);
-        verify(animalRepository, times(1)).findAll(any(Specification.class), any(Sort.class));
+        verify(animalRepository, times(1)).findAll();
     }
 
     @Test
-    void getAnimals_WithFilters_ShouldReturnFilteredAnimals() {
+    void getAnimals_NoExampleWithSort_ShouldReturnAllAnimalsWithSort() {
+        // Arrange
+        List<Animal> animals = Arrays.asList(
+                Animal.builder().name("Buddy").type("Dog").sex("Male").weight(10).cost(100).category(Category.FOURTH).build(),
+                Animal.builder().name("Kitty").type("Cat").sex("Female").weight(5).cost(50).category(Category.SECOND).build()
+        );
+        Sort sort = Sort.by("weight");
+        when(animalRepository.findAll(sort)).thenReturn(animals);
+
+        // Act
+        List<Animal> result = animalService.getAnimals(null, sort);
+
+        // Assert
+        assertThat(result).isEqualTo(animals);
+        verify(animalRepository, times(1)).findAll(sort);
+    }
+
+    @Test
+    void getAnimals_WithExampleAndSort_ShouldReturnFilteredAnimalsWithSort() {
         // Arrange
         Animal animal1 = Animal.builder().name("Buddy").type("Dog").sex("Male").weight(10).cost(100).category(Category.FOURTH).build();
         Animal animal2 = Animal.builder().name("Kitty").type("Cat").sex("Female").weight(5).cost(50).category(Category.SECOND).build();
         List<Animal> allAnimals = Arrays.asList(animal1, animal2);
         List<Animal> expectedAnimals = Arrays.asList(animal1);
+        Animal animalExample = Animal.builder().type("Dog").build();
+        Sort sort = Sort.by("weight");
 
-        when(animalRepository.findAll(any(Specification.class), any(Sort.class))).thenReturn(expectedAnimals);
+        when(animalRepository.findAll(Example.of(animalExample), sort)).thenReturn(expectedAnimals);
 
         // Act
-        List<Animal> result = animalService.getAnimals("Dog", Category.FOURTH, "Male", Sort.by("weight"));
+        List<Animal> result = animalService.getAnimals(animalExample, sort);
 
         // Assert
         assertThat(result).isEqualTo(expectedAnimals);
-        verify(animalRepository, times(1)).findAll(any(Specification.class), any(Sort.class));
+        verify(animalRepository, times(1)).findAll(Example.of(animalExample), sort);
     }
 }

@@ -10,12 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import yaremax.com.pb_task_24_04.service.AnimalService;
-import yaremax.com.pb_task_24_04.entity.Category;
 import yaremax.com.pb_task_24_04.entity.Animal;
 
 import java.util.List;
@@ -31,16 +27,14 @@ public class AnimalController {
     @ApiResponse(responseCode = "200", description = "Successful response", content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = Animal.class))})
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Animal>> getAnimals(
-            @Parameter(description = "Type of the animal") @RequestParam(required = false) String type,
-            @Parameter(description = "Category of the animal") @RequestParam(required = false) Category category,
-            @Parameter(description = "Sex of the animal") @RequestParam(required = false) String sex,
+            @Parameter(description = "Example object for filtering animals") @RequestBody(required = false) Animal animalExample,
             @Parameter(description = "Direction to sort by") @RequestParam(required = false) Sort.Direction sortDirection,
             @Parameter(description = "Property to sort by") @RequestParam(required = false) String sortProperty) {
 
-        Sort sort = sortDirection != null && sortProperty != null
-                ? Sort.by(sortDirection, sortProperty)
+        Sort sort = sortDirection != null && sortProperty != null ? Sort.by(sortDirection, sortProperty)
+                : sortDirection == null && sortProperty != null ? Sort.by(Sort.Direction.ASC, sortProperty)
                 : Sort.unsorted();
 
-        return ResponseEntity.ok(animalService.getAnimals(type, category, sex, sort));
+        return ResponseEntity.ok(animalService.getAnimals(animalExample, sort));
     }
 }

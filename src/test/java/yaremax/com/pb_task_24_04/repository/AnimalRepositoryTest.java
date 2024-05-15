@@ -1,4 +1,4 @@
-package yaremax.com.pb_task_24_04.animal;
+package yaremax.com.pb_task_24_04.repository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,7 +6,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import yaremax.com.pb_task_24_04.entity.Animal;
 import yaremax.com.pb_task_24_04.entity.Category;
-import yaremax.com.pb_task_24_04.repository.AnimalRepository;
 
 import java.util.List;
 import java.util.Optional;
