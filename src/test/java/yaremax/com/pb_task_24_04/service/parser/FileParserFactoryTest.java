@@ -1,4 +1,4 @@
-package yaremax.com.pb_task_24_04.util.parser;
+package yaremax.com.pb_task_24_04.service.parser;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package yaremax.com.pb_task_24_04.file;
+package yaremax.com.pb_task_24_04.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import yaremax.com.pb_task_24_04.controller.FileUploadController;
 import yaremax.com.pb_task_24_04.entity.Animal;
 import yaremax.com.pb_task_24_04.exception.FileParsingException;
 import yaremax.com.pb_task_24_04.exception.GlobalExceptionHandler;
