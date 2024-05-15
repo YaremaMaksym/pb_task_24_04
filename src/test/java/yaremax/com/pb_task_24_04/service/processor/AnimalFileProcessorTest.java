@@ -59,6 +59,7 @@ class AnimalFileProcessorTest {
         );
 
         when(fileParserService.parseFile(multipartFile, Animal.class)).thenReturn(Optional.of(parsedAnimals));
+        when(animalEntityValidator.isValid(any())).thenReturn(true);
         when(animalService.addAnimal(any(Animal.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // Act
